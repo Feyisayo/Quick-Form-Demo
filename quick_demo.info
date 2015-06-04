@@ -1,0 +1,4 @@
+name = Quick Demo
+description = A Quick Demo
+package = Custom
+core = 7.x

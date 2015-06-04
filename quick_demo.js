@@ -1,0 +1,2 @@
+console.log('Drupal.settings.quick_demo.module_name is ' + Drupal.settings.quick_demo.module_name);
+console.log('Drupal.settings.quick_demo.module_author is ' + Drupal.settings.quick_demo.module_author);

@@ -1,0 +1,55 @@
+<?php
+function quick_demo_menu () {
+  $menu = array();
+  $menu['quick-demo-form'] = array(
+    'title' => t('Quick Demo'),
+    'description' => t('Quick Demo'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('quick_demo_form', 1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
+  return $menu;
+}
+
+function quick_demo_form() {
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#default_value' => 'Hello world',
+  );
+
+  $settings = array(
+    'module_name' => 'Quick Demo',
+    'module_author' => 'Feyisayo'
+  );
+
+  /*drupal_add_js(array('quick_demo' => $settings), 'setting');
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'quick_demo') . '/quick_demo.js' => array(
+      'scope' => 'footer'
+    )
+  );*/
+
+  $form['#attached']['js'] = array(
+    // This will be added to the Drupal.setting JS object on the front end after
+    // the page is loaded.
+    array(
+      'data' => array('quick_demo' => $settings),
+      'type' => 'setting'
+    ),
+    array(
+      'data' => drupal_get_path('module', 'quick_demo') . '/quick_demo.js',
+      // Using the footer scope allows the settings above to be
+      // defined before the quick_demo.js file is loaded
+      'scope' => 'footer'
+    )
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+
+  return $form;
+}
